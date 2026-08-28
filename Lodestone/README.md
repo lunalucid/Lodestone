@@ -2,6 +2,8 @@
 
 **This project is currently a work in progress. The current version is considered a minimum viable product.**
 
+[![Report Issues](https://img.shields.io/badge/github-Report%20Issues-e799ff?logo=github)](https://github.com/lunalucid/Lodestone/issues)
+
 Lodestone is an interface that allows you to save and edit coordinates with names and descriptions to set as waypoints later or share with others. Works with or without TomTom.
 
 ### Slash Commands
