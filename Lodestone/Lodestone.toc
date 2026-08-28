@@ -1,7 +1,7 @@
 ﻿## Interface: 120100
 ## Title: Lodestone
 ## Author: Lunalucid
-## Version: 0.1.0
+## Version: 0.1.1
 ## SavedVariables: LodestoneDB
 ## LoadSavedVariablesFirst: 1
 ## Notes: Save, organize, and navigate to your favorite locations account-wide.
