@@ -1,0 +1,10 @@
+Required files to generate the organized data by running the Python scripts:
+----------------------------------------------------------------------------
+Light.csv
+LightData.csv
+LightParams.csv
+LightSkybox.csv
+Profession.csv
+UiMap.csv
+UiMapAssignment.csv
+ZoneLight.csv

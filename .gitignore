@@ -1,0 +1,8 @@
+__pycache__/
+*.csv
+*.pyc
+*.tga~
+*.kra
+*.kra~
+.vscode/
+.zip

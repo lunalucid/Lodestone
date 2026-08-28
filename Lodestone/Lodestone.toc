@@ -1,0 +1,67 @@
+﻿## Interface: 120100
+## Title: Lodestone
+## Author: Lunalucid
+## Version: 0.1.0
+#@project-version@
+## SavedVariables: LodestoneDB
+## LoadSavedVariablesFirst: 1
+## Notes: Save, organize, and navigate to your favorite locations account-wide.
+#Lodestone is an interface that allows you to save and edit coordinates with names and descriptions to set as waypoints later or share with others. Works with or without TomTom.
+# X-Curse-Project-ID: 1642664
+# X-WoWI-ID:
+# X-Wago-ID:
+
+Libs\LibDBIcon-1.0\embeds.xml
+Libs\LibDBIcon-1.0\LibDBIcon-1.0\lib.xml
+
+Localization\enUS.lua
+Localization\deDE.lua
+Localization\esES.lua
+Localization\frFR.lua
+Localization\koKR.lua
+Localization\ptBR.lua
+Localization\ruRU.lua
+Localization\zhCN.lua
+Localization\zhTW.lua
+Localization\Localization.lua
+
+Core\Init.lua
+Core\Hello.lua
+Core\DB.lua
+Core\Util.lua
+Core\API.lua
+
+Data\Generated\GameData.lua
+Data\Generated\LightData.lua
+Data\Generated\MapData.lua
+
+Config\Config.lua
+Config\Color.lua
+Config\Font.lua
+Config\SlashCommands.lua
+Config\StaticPopupDialogs.lua
+
+Core\Print.lua
+Config\Settings.lua
+
+
+Core\Navigation.lua
+
+UI\Buttons.lua
+UI\Inputs.lua
+UI\Waypoints.lua
+
+Logic\DynamicSky.lua
+Data\DynamicSky.lua
+Data\SpotFrame.lua
+
+Panels\Main.lua
+Logic\Events.lua
+Panels\MenuBar.lua
+Panels\Content.lua
+Logic\Collection.lua
+Panels\Collection.lua
+Panels\Settings.lua
+Logic\Header.lua
+Panels\Header.lua
+Panels\MinimapButton.lua
