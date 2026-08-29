@@ -37,6 +37,11 @@ local PROFILE_DEFAULTS = {
     collection = {
       titleFont = 'ItemTextFontNormal',
       titleFontHeight = 18,
+    },
+    pins = {
+      persistentMapPins = true,
+      defaultMapPinSize = 24,
+      defaultMapPinLevel = 1
     }
   }
 }
