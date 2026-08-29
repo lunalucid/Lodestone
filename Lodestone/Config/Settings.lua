@@ -6,6 +6,7 @@ local settings = Settings.RegisterVerticalLayoutCategory(Lodestone.name)
 local function OnSettingChanged(setting, value)
 	Lodestone.Settings.update()
 	Lodestone.Collection.refreshWaypointList()
+	Lodestone.ReloadMapPins()
 end
 
 local function GetDropdownOptions(data)

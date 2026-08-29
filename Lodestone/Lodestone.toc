@@ -65,3 +65,4 @@ Panels\Settings.lua
 Logic\Header.lua
 Panels\Header.lua
 Panels\MinimapButton.lua
+Logic\Map.lua
