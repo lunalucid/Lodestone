@@ -50,5 +50,10 @@ Lodestone.Localization.enUS = {
   SETTINGS_TOMTOM_INSTALLED = 'TomTom is installed.',
   SETTINGS_TOMTOM_MISSING = 'TomTom is not installed.',
   SETTINGS_WAYPOINT_TITLE_FONT = 'Title Font',
-  SETTINGS_WAYPOINT_TITLE_FONT_HEIGHT = 'Title Font Height'
+  SETTINGS_WAYPOINT_TITLE_FONT_HEIGHT = 'Title Font Height',
+  SETTINGS_WAYPOINT_PERISTENT_MAP_PINS = 'Persistent Map Pins',
+  SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_SIZE = 'Default Map Pin Size',
+  SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_LEVEL = 'Default Map Pin Level',
+  SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_LEVEL_TT = 'Levels:\n1 - Parent\n2 - Continent\n3 - World',
+  MAP_PINS = 'Map Pins'
 }
