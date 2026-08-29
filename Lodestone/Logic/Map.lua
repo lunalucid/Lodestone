@@ -7,9 +7,6 @@ local HBDPins = LibStub('HereBeDragons-Pins-2.0')
 
 local PIN_TEXTURE_STRING = 'Interface\\AddOns\\%s\\Textures\\Pins\\%s.tga'
 
-local preference = Lodestone.lastProfile.settings.pins.persistentMapPins
-
-
 local function setupPinVisuals(pin, waypoint, id)
   local size = waypoint.pinSize or Lodestone.lastProfile.settings.pins.defaultMapPinSize or Lodestone.DEFAULT_WAYPOINT.pinSize
   pin:SetSize(size, size)
@@ -45,27 +42,26 @@ end
 
 local function placePins()
   local waypoints = Lodestone.lastProfile.waypoints
+  local preference = Lodestone.lastProfile.settings.pins.persistentMapPins
 
   HBDPins:RemoveAllWorldMapIcons(Lodestone)
   HBDPins:RemoveAllMinimapIcons(Lodestone)
+  if preference then
+    for id, waypoint in pairs(waypoints) do
+      if waypoint.mapId and waypoint.x and waypoint.y then
 
-  for id, waypoint in pairs(waypoints) do
-    if waypoint.mapId and waypoint.x and waypoint.y then
+        local minimapPin = CreateFrame('Button', nil, Minimap)
+        setupPinVisuals(minimapPin, waypoint, id)
+        HBDPins:AddMinimapIconMap(Lodestone, minimapPin, waypoint.mapId, waypoint.x, waypoint.y, true, true)
 
-      local minimapPin = CreateFrame('Button', nil, Minimap)
-      setupPinVisuals(minimapPin, waypoint, id)
-      HBDPins:AddMinimapIconMap(Lodestone, minimapPin, waypoint.mapId, waypoint.x, waypoint.y, true, true)
-
-      local worldMapPin = CreateFrame('Button', nil, UIParent)
-      setupPinVisuals(worldMapPin, waypoint, id)
-      HBDPins:AddWorldMapIconMap(Lodestone, worldMapPin, waypoint.mapId, waypoint.x, waypoint.y, waypoint.pinLevel or Lodestone.lastProfile.settings.pins.defaultMapPinLevel or Lodestone.DEFAULT_WAYPOINT.pinLevel)
-
+        local worldMapPin = CreateFrame('Button', nil, UIParent)
+        setupPinVisuals(worldMapPin, waypoint, id)
+        HBDPins:AddWorldMapIconMap(Lodestone, worldMapPin, waypoint.mapId, waypoint.x, waypoint.y, waypoint.pinLevel or Lodestone.lastProfile.settings.pins.defaultMapPinLevel or Lodestone.DEFAULT_WAYPOINT.pinLevel)
+      end
     end
   end
 end
 
-if preference then
-  placePins()
-end
+placePins()
 
 Lodestone.ReloadMapPins = placePins

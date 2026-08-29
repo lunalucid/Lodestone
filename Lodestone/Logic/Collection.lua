@@ -76,6 +76,7 @@ function Lodestone.UpdateWaypoint(id, options)
     end
   end
 
+  Lodestone.ReloadMapPins()
   return waypoint
 end
 
