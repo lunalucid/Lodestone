@@ -10,6 +10,8 @@
 
 Libs\LibDBIcon-1.0\embeds.xml
 Libs\LibDBIcon-1.0\LibDBIcon-1.0\lib.xml
+Libs\HereBeDragons\HereBeDragons-2.0.lua
+Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
 
 Localization\enUS.lua
 Localization\deDE.lua
