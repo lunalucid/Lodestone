@@ -14,7 +14,7 @@ Lodestone.Localization.esES = {
   DELETE_ALL_SAVED_WAYPOINTS = [[Elimina todos los waypoints guardados en tu colección]],
   CLICK_TO_SAVE = [[Haz clic para guardar esta ubicación en tu colección]],
   LEFT_CLICK_TOGGLE = [[Clic izquierdo: Alternar interfaz]],
-  MAP_PINS = [[<g id="1">•</g>	<g id="2">Pines del Mapa</g>]], -- (new Python translation)
+  MAP_PINS = [[Pines del Mapa]], -- Manual fix?
   NO_DESCRIPTION = [[Sin descripción]],
   RIGHT_CLICK_FOR_OPTIONS = [[Opciones de menú contextual]],
   SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_LEVEL = [[Nivel de pin de mapa predeterminado]], -- (new Python translation)
