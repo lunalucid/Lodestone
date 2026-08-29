@@ -33,6 +33,7 @@ Core\API.lua
 Data\Generated\GameData.lua
 Data\Generated\LightData.lua
 Data\Generated\MapData.lua
+Data\Generated\PinTextureData.lua
 
 Config\Config.lua
 Config\Color.lua
