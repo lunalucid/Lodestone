@@ -36,6 +36,7 @@ function Lodestone.SaveWaypoint(mapId, x, y, name, description, nameColor)
   end
   Lodestone.NotifySavedWaypoint(name, x, y)
   Lodestone.Collection.refreshWaypointList()
+  Lodestone.ReloadMapPins()
   return id
 end
 
@@ -49,54 +50,46 @@ function Lodestone.SaveCurrentWaypoint(name, description)
   end
   local id = Lodestone.SaveWaypoint(mapId, x, y, name, description)
   Lodestone.Collection.refreshWaypointList()
+  Lodestone.ReloadMapPins()
   return id
 end
 
-function Lodestone.UpdateWaypoint(id, name, description, mapId, coords, nameColor, nameColorSet, overrideBg, selectedTexture, selectedAtlas)
+function Lodestone.UpdateWaypoint(id, options)
+
   local waypoint = Lodestone.lastProfile.waypoints[id]
   if not waypoint then
     Lodestone.Notify(L.NO_SAVED_WAYPOINT)
     return
   end
 
-  if nameColorSet == nil and nameColor then nameColorSet = true end
+  if options.nameColorSet == nil and options.nameColor then options.nameColorSet = true end
+  if options.pinColorSet == nil and options.pinColor then options.pinColorSet = true end
 
-  waypoint.name = (name and name ~= '') and name or L.WAYPOINT
-  waypoint.description = description or ''
-  if nameColorSet then
-    waypoint.nameColor = nameColor
-  end
-  waypoint.overrideBg = overrideBg or waypoint.overrideBg or false
-  if overrideBg and selectedTexture then
-    waypoint.selectedTexture = selectedTexture
-  end
-  if selectedAtlas then
-    waypoint.selectedAtlas = selectedAtlas
-  end
-  if mapId then
-    waypoint.mapId = mapId
-  end
-  if coords then
-    if type(coords) == 'string' then
-      local newX, newY = Lodestone.Util.parseWaypointCoords(coords)
-      waypoint.x = newX or waypoint.x
-      waypoint.y = newY or waypoint.y
+  for k, v in pairs(options) do
+    if k == 'coords' then
+      if type(v) == 'string' then
+        local newX, newY = Lodestone.Util.parseWaypointCoords(v)
+        waypoint.x, waypoint.y = newX or waypoint.x, newY or waypoint.y
+      end
     else
-      if type(coords) == 'table' then
-        waypoint.x = coords.x or waypoint.x
-        waypoint.y = coords.y or waypoint.y
+      if options[k] then
+        waypoint[k] = v or waypoint[k] or Lodestone.DEFAULT_WAYPOINT[k]
       end
     end
   end
+
+  Lodestone.ReloadMapPins()
   return waypoint
 end
 
 function Lodestone.DeleteWaypoint(id)
   Lodestone.lastProfile.waypoints[id] = nil
+  Lodestone.ReloadMapPins()
 end
 
 function Lodestone.DeleteAllWaypoints()
   Lodestone.lastProfile.waypoints = {}
+  Lodestone.ReloadMapPins()
 end
 
 function Lodestone.GetWaypointById(id)

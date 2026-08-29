@@ -6,6 +6,7 @@ local settings = Settings.RegisterVerticalLayoutCategory(Lodestone.name)
 local function OnSettingChanged(setting, value)
 	Lodestone.Settings.update()
 	Lodestone.Collection.refreshWaypointList()
+	Lodestone.ReloadMapPins()
 end
 
 local function GetDropdownOptions(data)
@@ -19,7 +20,8 @@ end
 local SETTINGS_LABELS = {
 	['navigation'] = L.SETTINGS_NAVIGATION,
 	['collection'] = L.WAYPOINTS,
-	['slashCommands'] = L.SLASH_COMMANDS
+	['slashCommands'] = L.SLASH_COMMANDS,
+	['pins'] = L.MAP_PINS
 }
 Lodestone.SETTINGS_LABELS = SETTINGS_LABELS
 
@@ -124,6 +126,46 @@ local SETTINGS_CONFIG = {
 			cf = 'Slider',
 			ct = 'OptionsSliderTemplate',
 			data = {min = 12, max = 24, step = 1}
+		},
+	},
+	['pins'] = {
+		persistentMapPins = {
+			name = L.SETTINGS_WAYPOINT_PERISTENT_MAP_PINS,
+			v = 'persistentMapPins',
+			vKey = 'persistentMapPins',
+			default = true,
+			tt = '',
+			create = Settings.CreateCheckbox,
+			cf = 'CheckButton',
+			ct = 'UICheckButtonTemplate',
+		},
+		defaultMapPinSize = {
+			name = L.SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_SIZE,
+			v = 'defaultMapPinSize',
+			vKey = 'defaultMapPinSize',
+			default = Lodestone.lastProfile.settings.collection.defaultMapPinSize,
+			tt = '',
+			create = Settings.CreateSlider,
+			options = Settings.CreateSliderOptions(8, 64, 1),
+			label = true,
+			unit = FONT_SIZE_TEMPLATE,
+			cf = 'Slider',
+			ct = 'OptionsSliderTemplate',
+			data = {min = 8, max = 64, step = 1}
+		},
+		defaultMapPinLevel = {
+			name = L.SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_LEVEL,
+			v = 'defaultMapPinLevel',
+			vKey = 'defaultMapPinLevel',
+			default = Lodestone.lastProfile.settings.collection.defaultMapPinLevel,
+			tt = L.SETTINGS_WAYPOINT_DEFAULT_MAP_PIN_LEVEL_TT,
+			create = Settings.CreateSlider,
+			options = Settings.CreateSliderOptions(1, 3, 1),
+			label = true,
+			unit = TOOLTIP_UNIT_LEVEL,
+			cf = 'Slider',
+			ct = 'OptionsSliderTemplate',
+			data = {min = 1, max = 3, step = 1}
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿## Interface: 120100
 ## Title: Lodestone
 ## Author: Lunalucid
-## Version: 0.1.1
+## Version: 0.1.2
 ## SavedVariables: LodestoneDB
 ## LoadSavedVariablesFirst: 1
 ## Notes: Save, organize, and navigate to your favorite locations account-wide.
@@ -10,6 +10,8 @@
 
 Libs\LibDBIcon-1.0\embeds.xml
 Libs\LibDBIcon-1.0\LibDBIcon-1.0\lib.xml
+Libs\HereBeDragons\HereBeDragons-2.0.lua
+Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
 
 Localization\enUS.lua
 Localization\deDE.lua
@@ -31,6 +33,7 @@ Core\API.lua
 Data\Generated\GameData.lua
 Data\Generated\LightData.lua
 Data\Generated\MapData.lua
+Data\Generated\PinTextureData.lua
 
 Config\Config.lua
 Config\Color.lua
@@ -62,3 +65,4 @@ Panels\Settings.lua
 Logic\Header.lua
 Panels\Header.lua
 Panels\MinimapButton.lua
+Logic\Map.lua

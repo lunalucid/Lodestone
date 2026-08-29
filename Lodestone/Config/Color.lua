@@ -12,3 +12,5 @@ Lodestone.COLOR = {}
 for name, color in pairs(COLORS) do
   Lodestone.COLOR[name] = CreateColorFromHexString(color)
 end
+
+Lodestone.COLOR.MAINRGB = { r = 0.9058823529411765, g = 0.6, b = 1}
