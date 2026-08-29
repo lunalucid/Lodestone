@@ -36,6 +36,7 @@ function Lodestone.SaveWaypoint(mapId, x, y, name, description, nameColor)
   end
   Lodestone.NotifySavedWaypoint(name, x, y)
   Lodestone.Collection.refreshWaypointList()
+  Lodestone.ReloadMapPins()
   return id
 end
 
@@ -49,6 +50,7 @@ function Lodestone.SaveCurrentWaypoint(name, description)
   end
   local id = Lodestone.SaveWaypoint(mapId, x, y, name, description)
   Lodestone.Collection.refreshWaypointList()
+  Lodestone.ReloadMapPins()
   return id
 end
 
@@ -82,10 +84,12 @@ end
 
 function Lodestone.DeleteWaypoint(id)
   Lodestone.lastProfile.waypoints[id] = nil
+  Lodestone.ReloadMapPins()
 end
 
 function Lodestone.DeleteAllWaypoints()
   Lodestone.lastProfile.waypoints = {}
+  Lodestone.ReloadMapPins()
 end
 
 function Lodestone.GetWaypointById(id)
