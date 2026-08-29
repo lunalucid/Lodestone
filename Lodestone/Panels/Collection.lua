@@ -300,15 +300,14 @@ local function createWaypointEntry(waypoints, id, yOffset)
 
   local function exitEditMode(save)
     if save then
-      Lodestone.UpdateWaypoint(
-        id,
-        nameEditBox:GetText(),
-        descEditBox:GetText(),
-        tonumber(mapIdEditBox:GetText()),
-        coordEditBox:GetText(),
-        editNameColor,
-        nameColorSet
-      )
+      Lodestone.UpdateWaypoint(id, {
+        name = nameEditBox:GetText(),
+        description = descEditBox:GetText(),
+        mapId = tonumber(mapIdEditBox:GetText()),
+        coords = coordEditBox:GetText(),
+        nameColor = editNameColor,
+        nameColorSet = nameColorSet
+      })
     end
     if Collection.refreshWaypointList then
       Collection.refreshWaypointList()

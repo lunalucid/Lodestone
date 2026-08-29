@@ -79,7 +79,7 @@ local waypoint = {
 | `LodestoneAPI.SaveWaypoint(mapId, x, y, name?, description?)` | `mapId` (number), `x` (number), `y` (number), `name` (string) (optional), `description` (string) (optional) | `number` (id) | Saves a new waypoint to the collection |
 | `LodestoneAPI.SaveCurrentWaypoint(name?, description?)` | `name` (string) (optional), `description` (string) (optional) | `number` (id) | Saves current position to the collection |
 | `LodestoneAPI.DeleteWaypoint(id)` | `id` (number) | None | Deletes specified waypoint from collection |
-| `LodestoneAPI.UpdateWaypoint(id, name?, description?, mapId?, coords?, nameColor?)` | `id` (number), `name` (string) (optional), `description` (string) (optional), `mapId` (number) (optional), `coords` (string | table) (optional), `nameColor` (table) (optional) | `number` (id) | Saves a new waypoint to the collection |
+| `LodestoneAPI.UpdateWaypoint(id, options)` | `id` (number), \{`name?` (string), `description?` (string), `mapId?` (number), `coords?` (string or table), `nameColor?` (table), `pinTexture?` (string or number), `pinColor?` (table), `pinSize?` (number) `pinLevel?` (number)\} | `number` (id) | Saves a new waypoint to the collection |
 | `LodestoneAPI.GetPlayerPosition()` | None | `table` (mapId, x, y) | Returns current mapId, x, y |
 | `LodestoneAPI.ChatWaypoint(id)` |  `id` (number) | `boolean` | Sends a waypoint hyperlink to the chatbox |
 | `LodestoneAPI.Open()` | None | None | Opens Lodestone UI |
@@ -92,20 +92,17 @@ local waypoint = {
 local waypoint = LodestoneAPI.GetWaypointById(27)
 local now = GetGameTime()
 
-if waypoint then
-  LodestoneAPI.UpdateWaypoint(
-    waypoint.id,
-    string.format('%s (updated)', waypoint.name),
-    string.format('%s\n-Discovered rare anomaly at %s', waypoint.description, now),
-    nil,
-    nil,
-    {
-      r = 1,
-      g = 0,
-      b = 0.18039216
-    }
-    )
-end
+local options = {
+  name = string.format('%s (updated)', waypoint.name),
+  description = string.format('%s\n-Discovered rare anomaly at %s', waypoint.description, now),
+  nameColor = {
+    r = 1,
+    g = 0,
+    b = 0.18039216
+  }
+}
+
+LodestoneAPI.UpdateWaypoint(waypoint.id, options)
 ```
 
 ```lua

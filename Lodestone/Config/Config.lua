@@ -1,4 +1,5 @@
 local _, Lodestone = ...
+local L = Lodestone.L
 
 local DEFAULT_TOOLTIP = {
   text = '',
@@ -27,6 +28,23 @@ local DEFAULT_TOOLTIP = {
       vertexColor = {r = 1, g = 1, b = 1, a = 1}
     }
   }
+}
+
+Lodestone.DEFAULT_WAYPOINT = {
+  name = L.WAYPOINT,
+  description = '',
+  mapId = nil,
+  coords = {},
+  nameColor = {},
+  nameColorSet = false,
+  overrideBg = false,
+  selectedTexture = nil,
+  selectedAtlas = nil,
+  pinTexture = 'pin-1-mono',
+  pinColor = {},
+  pinColorSet = false,
+  pinSize = Lodestone.lastProfile.settings.pins.defaultMapPinSize,
+  pinLevel = Lodestone.lastProfile.settings.pins.defaultMapPinLevel
 }
 
 Lodestone.CONFIG = {
