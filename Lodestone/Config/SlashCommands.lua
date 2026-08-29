@@ -50,7 +50,7 @@ local function parseMsgToWaypoint(msg)
   if name then name = name:gsub('(%d+%.?%d*)[,%s](%d+%.?%d*)', ''):gsub('%s', '', 1); if name == '' then name = nil end end
   if description then description = description:gsub('%s+$', '') end
 
-  Lodestone.SaveWaypoint(mapId, x, y, name, description)
+  Lodestone.SaveWaypoint(tonumber(mapId), x, y, name, description)
 end
 
 SlashCmdList['NEW_WAYPOINT'] = function(msg)
