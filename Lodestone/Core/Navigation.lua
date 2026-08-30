@@ -131,7 +131,7 @@ end
 
 function Lodestone.NotifyCannotSetWaypoint(mapId, x, y)
   local info = mapId and C_Map.GetMapInfo(mapId)
-  if x or y > 1 then
+  if x > 1 or y > 1 then
     Lodestone.Notify(string.format(L.INVALID_COORDS, Lodestone.Util.formatWaypointCoords({x = x, y = y})))
   else
     Lodestone.Notify(string.format(L.CANNOT_SET_WAYPOINT, tostring(mapId), info and info.name or UNKNOWN))
