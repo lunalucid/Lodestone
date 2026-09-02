@@ -131,3 +131,6 @@ local newWaypointId = LodestoneAPI.SaveWaypoint(
 )
 
 ```
+
+#### Credits
+* 'Ultimate color icons' - [Streamline](https://github.com/webalys-hq/streamline-vectors)
