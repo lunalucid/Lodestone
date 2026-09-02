@@ -36,6 +36,7 @@ Lodestone.Localization.enUS = {
   DELETE_WAYPOINT_DESC = 'Remove this waypoint from your collection.',
   CHAT_WAYPOINT = 'Send to chat',
   OVERRIDE_WAYPOINT_BG = 'Choose Texture',
+  TEXTURES = 'Textures',
   NO_WAYPOINTS_MATCH = 'No waypoints match your search.',
   NO_SAVED_WAYPOINTS_YET = 'No saved waypoints yet.',
   COORDINATES = 'Coordinates',
