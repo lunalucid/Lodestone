@@ -153,3 +153,15 @@ function Lodestone.Util.consolidateTables(entries, tbl, config)
     end
   end
 end
+
+function Lodestone.Util.createSubContextMenuCategories(tbl, parent, func, func2)
+  for k, v in pairs(tbl) do
+    local categoryButton = parent:CreateButton(k)
+    for _, data in ipairs(v) do
+      local btn = categoryButton:CreateButton(data.label, function() func(data) end)
+      if func2 then
+        func2(parent, btn, data)
+      end
+    end
+  end
+end
