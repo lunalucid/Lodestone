@@ -337,14 +337,9 @@ local function createWaypointEntry(waypoints, id, yOffset)
     descEditFrame:Show()
     applyNameEditBoxStyle()
     waypointEditNameColorButton:Show()
-    --waypointEditNameColorButton:ClearAllPoints()
-    --waypointEditNameColorButton:SetPoint('LEFT', nameEditBox, 'RIGHT', XPAD / 2, 0)
     waypointEditButton:ClearAllPoints()
-    --waypointEditButton:SetPoint('LEFT', waypointEditNameColorButton, 'RIGHT', 4)
     waypointEditButton:SetPoint('LEFT', coordEditBox, 'RIGHT', XPAD / 2, 0)
     waypointCoordinates:Hide()
-    --waypointCoordinates:ClearAllPoints()
-    --waypointCoordinates:SetPoint('LEFT', waypointEditButton, 'RIGHT', Lodestone.CONFIG.PADDING)
     nameEditBox:SetFocus()
     applyNameEditBoxStyle()
   end
@@ -379,6 +374,40 @@ local function createWaypointEntry(waypoints, id, yOffset)
       Lodestone.ChatWaypoint(id)
     end)
 
+    local pinTextureMenuButton = rootDescription:CreateButton(L.PIN_TEXTURES)
+    pinTextureMenuButton:SetGridMode(MenuConstants.VerticalGridDirection, 6)
+    for i in pairs(Lodestone.PIN_TEXTURE_DATA) do
+      local label = Lodestone.PIN_TEXTURE_DATA[i]
+      local btn = pinTextureMenuButton:CreateButton('', function()
+        Lodestone.lastProfile.waypoints[id].pinTexture = Lodestone.PIN_TEXTURE_DATA[i]
+        Lodestone.Collection.refreshWaypointList()
+        Lodestone.ReloadMapPins()
+      end)
+      local buttonTexture = string.format(Lodestone.CONFIG.PIN_TEXTURE_STRING, Lodestone.name, label)
+      btn:AddInitializer(function(button)
+
+      if button.fontString then
+        button.fontString:SetText('')
+      end
+
+      if button.Icon then
+        button.Icon:Hide()
+      end
+
+      if not button.customIcon then
+
+        button.customIcon = button:AttachTexture('ARTWORK')
+        button.customIcon:SetSize(24, 24)
+        button.customIcon:SetPoint('CENTER', button, 'CENTER', 0, 0)
+      end
+
+      button.customIcon:SetTexture(buttonTexture)
+      button.customIcon:Show()
+
+      button:SetSize(32, 32)
+      end)
+    end
+
     local function overrideBg()
       return Lodestone.lastProfile.waypoints[id].overrideBg or false
     end
@@ -396,22 +425,10 @@ local function createWaypointEntry(waypoints, id, yOffset)
       overrideBg,
       toggleOverrideBg
     )
-    Collection.textureMenuButton = rootDescription:CreateButton('Textures')
+    Collection.textureMenuButton = rootDescription:CreateButton(L.TEXTURES)
     Collection.textureMenuButton:SetEnabled(Collection.overrideBgCheck:isSelected())
 
-    local function createSubContextMenuCategories(tbl, parent, func, func2)
-      for k, v in pairs(tbl) do
-        local categoryButton = parent:CreateButton(k)
-        for _, data in ipairs(v) do
-          local btn = categoryButton:CreateButton(data.label, function() func(data) end)
-          if func2 then
-            func2(parent, btn, data)
-          end
-        end
-      end
-    end
-
-    createSubContextMenuCategories(
+    Lodestone.Util.createSubContextMenuCategories(
       Lodestone.SpotFrame.BACKGROUND_TEXTURES,
       Collection.textureMenuButton,
       function(data)
