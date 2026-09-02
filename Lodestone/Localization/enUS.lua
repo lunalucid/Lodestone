@@ -37,6 +37,7 @@ Lodestone.Localization.enUS = {
   CHAT_WAYPOINT = 'Send to chat',
   OVERRIDE_WAYPOINT_BG = 'Choose Texture',
   TEXTURES = 'Textures',
+  PIN_TEXTURES = 'Pin Style',
   NO_WAYPOINTS_MATCH = 'No waypoints match your search.',
   NO_SAVED_WAYPOINTS_YET = 'No saved waypoints yet.',
   COORDINATES = 'Coordinates',
