@@ -23,7 +23,7 @@ You can view or enable/disable these slash commands in Game Menu (pops up when y
 ```
 /new #114 33 59 Unborn Val'Kyr Spawn 1 -d Borean Tundra, #114 47 6 Unborn Val'Kyr Spawn 2 -d Borean Tundra, #114 81 48 Unborn Val'Kyr Spawn 3 -d Borean Tundra
 ```
-The required [UiMapID](https://wowpedia.fandom.com/wiki/UiMapID) argument ensures the coordinates are mapped to the right zone.
+[UiMapID List](https://wowpedia.fandom.com/wiki/UiMapID)
 
 ## Features
 * **Waypoint Collection/Diary:** Save and maintain a personal database of waypoints to track or share at any time, as well as customize each waypoint entry visually and add notes/memos if desired.
