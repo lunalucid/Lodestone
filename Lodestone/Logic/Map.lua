@@ -5,8 +5,6 @@ Lodestone.Maps = Lodestone.Maps or {}
 local HBD = LibStub('HereBeDragons-2.0')
 local HBDPins = LibStub('HereBeDragons-Pins-2.0')
 
-local PIN_TEXTURE_STRING = 'Interface\\AddOns\\%s\\Textures\\Pins\\%s.tga'
-
 local function setupPinVisuals(pin, waypoint, id)
   local size = waypoint.pinSize or Lodestone.lastProfile.settings.pins.defaultMapPinSize or Lodestone.DEFAULT_WAYPOINT.pinSize
   pin:SetSize(size, size)
@@ -28,7 +26,8 @@ local function setupPinVisuals(pin, waypoint, id)
 
   local tex = pin:CreateTexture(nil, 'OVERLAY')
   tex:SetAllPoints()
-  local pinTextureString = string.format(PIN_TEXTURE_STRING, Lodestone.name, waypoint.pinTexture or Lodestone.DEFAULT_WAYPOINT.pinTexture)
+  local pinVariant = waypoint.pinColorSet and waypoint.pinColor and string.format('-mono', waypoint.pinTexture) or waypoint.pinTexture or Lodestone.DEFAULT_WAYPOINT.pinTexture
+  local pinTextureString = string.format(Lodestone.CONFIG.PIN_TEXTURE_STRING, Lodestone.name, pinVariant)
   tex:SetTexture(pinTextureString)
 
   if waypoint.pinColorSet and waypoint.pinColor then
