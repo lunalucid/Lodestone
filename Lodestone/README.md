@@ -29,3 +29,6 @@ You can view or enable/disable these slash commands in Game Menu (pops up when y
 * **Waypoint Collection/Diary:** Save and maintain a personal database of waypoints to track or share at any time, as well as customize each waypoint entry visually and add notes/memos if desired.
 * **Works with TomTom** Activate waypoints via TomTom automatically if you have it installed already. You can disable this feature in the official game menu options screen or the Lodestone options tab.
 * **Full Localization:** Localization added for every official World of Warcraft game language.
+
+#### Credits
+* 'Ultimate color icons' - [Streamline](https://github.com/webalys-hq/streamline-vectors)
