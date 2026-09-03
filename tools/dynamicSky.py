@@ -23,15 +23,11 @@ def resolve_light_id(zoneLightData: Dict[str, Dict[str, str]], mapId: str, name:
     if name in zone_map:
         return zone_map[name]
     
-    for key in zone_map:
+    for key, value in zone_map.items():
         if name in key or key in name:
-            return zone_map[key]
+            return value
     
-    match = u.fuzzy_match(name, zone_map)
-    if match:
-        return match
-    
-    return None
+    return u.fuzzy_match(name, zone_map)
 
 lightDataCols = {
     'direct': 'DirectColor',
@@ -83,7 +79,7 @@ with (
         lightSkyboxData: Dict[str, str] = {}
         lightSkyboxData2: Dict[str, str] = {}
         skyboxNames: Dict[str, Dict[str, str]] = {}
-        items: list[str] = []
+        items = set()
         for row in lightSkybox:
             lightSkyboxData[row['ID']] = row['SkyboxFileDataID']
 
@@ -94,7 +90,7 @@ with (
             skyboxNames[row['SkyboxFileDataID']] = {'fileName': row['Name'], 'simplifiedName': name}
 
             if name not in items and not name.startswith('xp'):
-                items.append(name)
+                items.add(name)
                 lightSkyboxData2[name] = row['SkyboxFileDataID']
 
         zoneLightData: Dict[str, Dict[str, str]] = {}
@@ -108,6 +104,8 @@ with (
                 'raw': row['Name_lang'],
                 'normalized': u.normalizeName(row['Name_lang']),
             }
+
+        fuzzy_skybox_cache = {}
 
         uiMapAssignmentData: Dict[str, Dict[str, Dict[str, Any]]] = defaultdict(dict)
         for row in uiMapAssignment:
@@ -130,7 +128,14 @@ with (
                 lightId = resolve_light_id(zoneLightData, mapId, name)
             lightParamId = lightData.get(lightId, '') if lightId is not None and lightId != '' else ''
             skyboxId = lightParamsData.get(lightParamId, '') if lightParamId != '' else ''
-            lightSkyboxFileID = lightSkyboxData.get(skyboxId, '') if skyboxId != '' else u.fuzzy_match(name, lightSkyboxData2) if u.fuzzy_match(name, lightSkyboxData2) else '' 
+            lightSkyboxFileID = lightSkyboxData.get(skyboxId, '')
+            if not lightSkyboxFileID and skyboxId == '':
+                if name in fuzzy_skybox_cache:
+                    lightSkyboxFileID = fuzzy_skybox_cache[name]
+                else:
+                    match_res = u.fuzzy_match(name, lightSkyboxData2)
+                    lightSkyboxFileID = match_res if match_res else ''
+                    fuzzy_skybox_cache[name] = lightSkyboxFileID
 
             # I don't know why Windrunner Spire connects "placeholder/empty/morgan test" but it does
             skyboxMatchMethod = ''
@@ -146,11 +151,16 @@ with (
 
             uiMapAssignmentData[mapId][uiMapId] = {'name': uiMapInfo['raw'], 'lightParamId': lightParamId, 'lightSkyboxFileID': lightSkyboxFileID, 'normalizedName': uiMapInfo['normalized'], 'alias': matchedAlias, 'skyboxFileName': skyboxFileName, 'skyboxSimplifiedName': skyboxSimplifiedName, 'skyboxMatchMethod': skyboxMatchMethod, 'skyboxId': skyboxId}
 
+        param_zones_added = defaultdict(set)
+
         for mapId, uiMapId in uiMapAssignmentData.items():
             u.outLine(out, 1, f'[{mapId}] = {{')
             for uiMapId, data in uiMapAssignmentData[mapId].items():
-                if data['lightParamId'] != '' and data['name'] not in paramZones[int(data['lightParamId'])]:
-                    paramZones[int(data['lightParamId'])].append(data['name'])
+                if data['lightParamId'] != '':
+                    lpid = int(data['lightParamId'])
+                    if data['name'] not in param_zones_added[lpid]:
+                        paramZones[lpid].append(data['name'])
+                        param_zones_added[lpid].add(data['name'])
                 u.outLine(out, 2, f'[{uiMapId}] = {{', f'{data['name']}')
                 u.outLine(out, 3, f'lightParamId = {'nil' if data['lightParamId'] == '' else int(data['lightParamId'])},')
                 u.outLine(out, 3, f'skyboxFileDataID = {'nil' if data['lightSkyboxFileID'] == '' else int(data['lightSkyboxFileID'])},', f'Retrieval method: {data['skyboxMatchMethod']}{f' ({data['skyboxId']})' if data['skyboxId'] else ''} -> {data['skyboxSimplifiedName']} | {data['skyboxFileName']}' if data['skyboxSimplifiedName'] and data['skyboxFileName'] else '', 0)
@@ -175,9 +185,13 @@ with open('csv/LightData.csv', encoding='utf-8-sig', newline='') as f:
 
         for row in reader:
             rid = row['LightParamID']
-            time_val = row['Time']
 
+            if not rid or int(rid) not in paramZones:
+                continue
+
+            time_val = row['Time']
             time_entry = {}
+
             for k, src in lightDataCols.items():
                 time_entry[k] = u.to_hex(int(row[src]))
             
