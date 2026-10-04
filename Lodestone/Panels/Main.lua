@@ -8,7 +8,7 @@ do
   local CloseButton = Main.CloseButton or _G[Main:GetName() .. 'CloseButton']
   if CloseButton then
     CloseButton:SetScript('OnClick', function()
-      if Lodestone.close then
+      if Lodestone.Close then
         Lodestone.Close()
       else
         Main:Hide()

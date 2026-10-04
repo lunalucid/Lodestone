@@ -4,7 +4,8 @@ from pathlib import Path
 PROCESSES = [
   'dynamicSky.py',
   'gameData.py',
-  'locales.py'
+  'locales.py',
+  'pins.py'
 ]
 
 csv_path = Path('csv/')
